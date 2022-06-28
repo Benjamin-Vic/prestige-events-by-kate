@@ -31,7 +31,8 @@
           width="16px"
           style="vertical-align: middle;"
         />
-        Téléphone : 06.89.71.52.21
+        Téléphone :
+        <a href="tel:+33689715221" class="mobile-text">06.89.71.52.21</a>
       </span>
     </div>
 
@@ -57,6 +58,12 @@
     font-family: "Roboto Slab", serif;
     font-size: small;
     padding: 0 38px;
+  }
+
+  .mobile-text {
+    color: black;
+    text-decoration: none;
+    cursor: default;
   }
 
   main {

@@ -160,7 +160,8 @@
 
   @media (max-width: 992px) {
     .button-prev,
-    .button-next {
+    .button-next,
+    .shadow {
       display: none;
     }
   }

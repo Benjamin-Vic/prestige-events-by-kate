@@ -54,10 +54,15 @@
     </div>
   </div>
 
-  <div class="navigation-container-mobile">
-    <div class="navigation-container-left">
-      <button class="button-navigation" in:fly={{ y: -200, duration: 500 }}>
-        <img src="/src/assets/icons/menu.svg" alt="menu" width="40px" />
+  <div class="navigation-container mobile">
+    <div class="navigation-container-left mobile">
+      <button class="button-navigation mobile">
+        <img
+          src="/src/assets/icons/menu.svg"
+          alt="menu"
+          width="40px"
+          style="vertical-align: bottom;"
+        />
       </button>
       <!-- <a class="button-navigation" href="/"> Accueil </a>
       <a class="button-navigation" href="/mariage"> Mariage </a>
@@ -91,11 +96,25 @@
     transition: background-color 500ms linear;
   }
 
+  .navigation-container.mobile {
+    width: 100%;
+    height: 56px;
+    padding: 8px 0 0;
+
+    display: none;
+
+    background-color: white;
+  }
+
   .navigation-container-left {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-around;
+  }
+
+  .navigation-container-left.mobile {
+    justify-content: left;
   }
 
   .navigation-container-right {
@@ -130,17 +149,13 @@
     transform: scaleX(1);
   }
 
-  .navigation-container-mobile {
-    display: none;
+  .button-navigation.mobile {
+    padding: 0 8px;
+    border: none;
+  }
 
-    position: fixed;
-    width: 100%;
-    padding: 16px 0px;
-
-    justify-content: space-between;
-    z-index: 2;
-
-    background-color: white;
+  .button-navigation.mobile:after {
+    border-bottom: none !important;
   }
 
   @media (max-width: 992px) {
@@ -148,7 +163,7 @@
       display: none;
     }
 
-    .navigation-container-mobile {
+    .navigation-container.mobile {
       display: flex;
     }
   }
