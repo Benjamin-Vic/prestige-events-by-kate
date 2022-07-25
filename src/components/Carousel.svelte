@@ -1,29 +1,21 @@
 <script>
   import { onMount } from "svelte";
-  import { fade, fly } from "svelte/transition";
-
-  const arrow = "/src/assets/icons/arrow.svg";
+  import { fade } from "svelte/transition";
 
   export let data;
   export let duration;
   export let delay;
 
-  let is_top = true;
   let is_hover = false;
-  let index = 0;
+  let index = -1;
   let interval;
-
-  const carouselTopFunc = () => {
-    is_top = window.scrollY <= 10 ? true : false;
-  };
-
-  const setHover = (event) =>
-    (is_hover = event.type === "mouseenter" ? true : false);
 
   const scaleAnimation = (event) => {
     if (data.length <= 1) return;
     event.srcElement.style["transform"] = "scale(1.1)";
   };
+
+  const setHover = (event) => (is_hover = event.type === "mouseenter");
 
   const nextIndex = () => {
     index = index + 1 < data.length ? index + 1 : 0;
@@ -45,42 +37,41 @@
 
   onMount(() => {
     createInterval();
+    index = 0;
     return () => {
       clearInterval(interval);
     };
   });
-
-  document.addEventListener("scroll", carouselTopFunc, false);
 </script>
 
-<carousel>
-  <div class="carousel-container">
+<template>
+  <div class="container-carousel">
     {#if data.length > 1 && is_hover}
       <button
         on:click={prevIndex}
-        class="button-prev"
+        class="button prev"
         transition:fade
         on:mouseenter={setHover}
         on:mouseleave={setHover}
       >
-        <img src={arrow} alt="prev" class="arrow-carousel" />
+        <img src="/icons/arrow.svg" alt="prev" class="arrow" />
       </button>
       <button
         on:click={nextIndex}
-        class="button-next"
+        class="button next"
         transition:fade
         on:mouseenter={setHover}
         on:mouseleave={setHover}
       >
-        <img src={arrow} alt="prev" class="arrow-carousel" />
+        <img src="/icons/arrow.svg" alt="prev" class="arrow" />
       </button>
     {/if}
-    {#each data as { img }, i}
+    {#each data as { img, alt }, i}
       {#if index === i}
         <img
           src={img}
-          alt={img}
-          class="img-carousel"
+          {alt}
+          class="img"
           transition:fade={{ duration: duration }}
           on:introstart={scaleAnimation}
           on:mouseenter={setHover}
@@ -88,55 +79,51 @@
         />
       {/if}
     {/each}
-    {#if is_top}
-      <div class="shadow" on:mouseenter={setHover} on:mouseleave={setHover} />
-    {/if}
   </div>
-</carousel>
+</template>
 
 <style scoped>
-  .carousel-container {
+  .container-carousel {
     position: relative;
-    height: 100vh;
+    height: 95vh;
     overflow: hidden;
   }
 
-  .button-prev,
-  .button-next {
+  .container-carousel .button {
     position: absolute;
-    margin: auto;
-    z-index: 1;
+    width: 40px;
+    z-index: 2;
     top: 50%;
 
-    background-color: transparent;
-    padding: 0;
     border: 0;
-    z-index: 2;
+    margin: auto;
+    padding: 0;
+
+    background-color: transparent;
+    cursor: pointer;
   }
 
-  .button-prev {
+  .container-carousel .button.prev {
     left: 0;
     transform: rotate(90deg);
   }
 
-  .button-next {
+  .container-carousel .button.next {
     right: 0;
     transform: rotate(-90deg);
   }
 
-  .arrow-carousel {
-    width: 40px;
+  .container-carousel .button .arrow {
     filter: invert(99%) sepia(0%) saturate(0%) hue-rotate(17deg)
       brightness(105%) contrast(100%) drop-shadow(0px 0px 8px #000000);
   }
 
-  .arrow-carousel:hover {
-    cursor: pointer;
+  .container-carousel .button .arrow:hover {
     filter: invert(100%) sepia(9%) saturate(86%) hue-rotate(161deg)
       brightness(113%) contrast(89%) drop-shadow(0px 0px 8px #000000);
   }
 
-  .img-carousel {
+  .container-carousel .img {
     position: absolute;
     width: 100%;
     height: 100vh;
@@ -148,20 +135,9 @@
     transition: transform 4s;
   }
 
-  .shadow {
-    position: absolute;
-    height: 100vh;
-    width: 100%;
-    top: 0%;
-
-    box-shadow: 0px 256px 64px -64px rgb(0 0 0 / 25%) inset;
-    z-index: 1;
-  }
-
   @media (max-width: 992px) {
-    .button-prev,
-    .button-next,
-    .shadow {
+    .container-carousel .button.prev,
+    .container-carousel .button.next {
       display: none;
     }
   }

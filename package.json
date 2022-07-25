@@ -1,21 +1,20 @@
 {
-  "name": "prestige-event",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "devn": "vite --host",
-    "build": "vite build",
-    "preview": "vite preview"
-  },
-  "devDependencies": {
-    "@sveltejs/vite-plugin-svelte": "^1.0.0-next.30",
-    "svelte": "^3.44.0",
-    "svelte-carousel": "^1.0.19",
-    "vite": "^2.9.9"
-  },
-  "dependencies": {
-    "svelte-routing": "^1.6.0"
-  }
+	"name": "prestige-events",
+	"version": "0.0.1",
+	"scripts": {
+		"dev": "svelte-kit dev",
+		"devn": "svelte-kit dev --host",
+		"build": "svelte-kit build",
+		"package": "svelte-kit package",
+		"preview": "svelte-kit preview",
+		"prepare": "svelte-kit sync"
+	},
+	"devDependencies": {
+		"@sveltejs/adapter-auto": "next",
+		"@sveltejs/adapter-static": "^1.0.0-next.34",
+		"@sveltejs/kit": "next",
+		"svelte": "^3.44.0",
+		"svelte-check": "^2.8.0"
+	},
+	"type": "module"
 }

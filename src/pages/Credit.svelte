@@ -1,1 +1,0 @@
-<a href="https://fr.freepik.com/vecteurs/dessin-ornement">Dessin ornement vecteur créé par freepik - fr.freepik.com</a>
